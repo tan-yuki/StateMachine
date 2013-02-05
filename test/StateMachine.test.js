@@ -116,5 +116,35 @@
 
     });
 
+    test('pass arguments to emit event function', function() {
+        expect(4);
+
+        var elem = $('#editable-link input');
+
+        var TestStateMachine = new StateMachine();
+
+        var State1 = TestStateMachine.create();
+        var State2 = TestStateMachine.create({
+            elem: elem
+        });
+
+        var param1Val = 'hogehoge';
+        var param2Val = 'foobar';
+        State1.on('argsTest', function(e, param1, param2) {
+            equal(param1, param1Val);
+            equal(param2, param2Val);
+        });
+
+        TestStateMachine.switchTo(State1);
+        State1.fire('argsTest', [param1Val, param2Val]);
+
+        State2.on('argsTest', function(e, param1, param2) {
+            equal(param1, param2Val);
+            equal(param2, param1Val);
+        });
+        TestStateMachine.switchTo(State2);
+        State2.fire('argsTest', [param2Val, param1Val]);
+    });
+
 
 }) (jQuery, window);

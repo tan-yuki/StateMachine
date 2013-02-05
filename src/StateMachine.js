@@ -1,6 +1,5 @@
 (function($, __global__) {
 
-
     /**
      * StateMachine
      *
@@ -62,8 +61,8 @@
                     this.obj.unbind(name);
                 },
 
-                fire: function(name) {
-                    this.obj.trigger(name);
+                fire: function() {
+                    this.obj.trigger.apply(this.obj, arguments);
                 },
 
                 isActive: function() {
