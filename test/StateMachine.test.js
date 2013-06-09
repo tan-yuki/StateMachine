@@ -43,13 +43,13 @@
         TestStateMachine.fire('click');
     });
 
-    test('fire events when not set current state', function() {
+    test('emit events when not set current state', function() {
         var TestStateMachine = new StateMachine();
         TestStateMachine.fire('hogehoge');
         ok(true);
     });
 
-    test('fire not register events', function() {
+    test('emit events which is not registered', function() {
         var TestStateMachine = new StateMachine();
         var NormalState = TestStateMachine.create();
         NormalState.on('click', function() {
